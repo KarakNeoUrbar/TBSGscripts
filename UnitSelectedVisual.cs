@@ -1,0 +1,42 @@
+using System;
+using UnityEngine;
+
+public class UnitSelectedVisual : MonoBehaviour
+{
+    [SerializeField] private Unit unit;
+
+    private MeshRenderer meshRenderer;
+
+    private void Awake()
+    {
+        meshRenderer = GetComponent<MeshRenderer>();
+    }
+
+    private void Start()
+    {
+        UnitActionSystem.Instance.OnSelectedUnitChanged += UnitActionSystem_OnSelectedUnitChanged;
+
+        UpdateVisual();
+    }
+
+    private void UnitActionSystem_OnSelectedUnitChanged(object sender, EventArgs empty)
+    {
+        UpdateVisual();
+    }
+    private void UpdateVisual()
+    {
+        if (UnitActionSystem.Instance.GetSelectedUnit() == unit)
+        {
+            meshRenderer.enabled = true;
+        } else
+        {
+            meshRenderer.enabled = false;
+        }
+    }
+
+    //UNITY ENGINE run at gameObject.Destory 引擎功能，當物件摧毀時執行
+    private void OnDestroy()
+    {
+        UnitActionSystem.Instance.OnSelectedUnitChanged -= UnitActionSystem_OnSelectedUnitChanged;
+    }
+}
