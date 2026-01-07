@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InteractSphere : MonoBehaviour, IInteractable
 {
@@ -9,6 +10,8 @@ public class InteractSphere : MonoBehaviour, IInteractable
     [SerializeField] private Material greenMaterial;
     [SerializeField] private Material redMaterial;
     [SerializeField] private MeshRenderer meshRenderer;
+ 
+
     private GridPosition gridPosition;
     private Action onInteractionComplete;
     private bool isActive;
@@ -48,6 +51,8 @@ public class InteractSphere : MonoBehaviour, IInteractable
     {
         isGreen = false;
         meshRenderer.material = redMaterial;
+
+        Loader.Load(Loader.Scene.MainMenuScene);
     }
 
     public void Interact(Action onInteractionComplete)
@@ -56,6 +61,7 @@ public class InteractSphere : MonoBehaviour, IInteractable
 
         isActive = true;
         timer = .5f;
+
         if (isGreen)
         {
             SetColorRed();

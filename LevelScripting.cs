@@ -12,6 +12,7 @@ public class LevelScripting : MonoBehaviour
     [SerializeField] private List<GameObject> enemy2List;
     [SerializeField] private Door door1;
     [SerializeField] private Door door2;
+    [SerializeField] private List<GameObject> otherList;
 
     private bool hasShownHider = false;
 
@@ -28,6 +29,7 @@ public class LevelScripting : MonoBehaviour
         door2.OnDoorOpened += (object sender, EventArgs e) =>
         {
             SetActiveGameObjectList(hider3List, false);
+            SetActiveGameObjectList(otherList, true);
         };
 
     }
@@ -42,6 +44,7 @@ public class LevelScripting : MonoBehaviour
             Debug.Log("passing lavel");
             hasShownHider = true;
             SetActiveGameObjectList(hider2List, false);
+            SetActiveGameObjectList(enemy2List, true);
         }
     }
 
